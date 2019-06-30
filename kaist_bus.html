@@ -13,7 +13,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script>
 
-    var array1 = [600, 900, 1200, 1300];
+    var array1 = [525, 535, 555, 565, 585, 595, 615, 625, 645, 655, 675, 685, 705, 775, 795, 805, 825, 835, 855, 865, 885, 895, 915, 925, 945, 955, 975, 985, 1005, 1015];
 
     var date = new Date();
 
@@ -22,6 +22,7 @@
       var time = tick(date.getHours(), 2) + ":" + tick(date.getMinutes(), 2) + ":" + tick(date.getSeconds(), 2);
       $("#timer").text(time);
       $("#timer2").text(time);
+      $("#timer3").text(time);
 
       var next_bus_val = next_bus(date.getHours(), date.getMinutes(), 0);
       if (next_bus_val == -1) {
@@ -33,20 +34,41 @@
         $("#timer_left").text(tick(Math.floor(time_left / 3600), 2) + ":" + tick(Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60), 2) + ":" + tick(time_left - Math.floor(time_left / 3600) * 3600 - Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60) * 60, 2));
       }
 
-      var offset = 3
-      var next_bus_val = next_bus(date.getHours(), date.getMinutes(), offset);
-      if (next_bus_val == -1) {
-        $("#timer_nextbus2").text("운행 종료");
-        $("#timer_left2").text("운행 종료");
-      } else {
-        var next_bus_time = array1[next_bus_val] + offset;
-        $("#timer_nextbus2").text(tick(Math.floor(next_bus_time / 60), 2) + ":" + tick(Math.floor(next_bus_time - Math.floor(next_bus_time / 60) * 60), 2) + ":00");
-        var time_left = Math.floor(next_bus_time / 60) * 3600 + Math.floor(next_bus_time - Math.floor(next_bus_time / 60) * 60) * 60 - (date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds());
-        $("#timer_left2").text(tick(Math.floor(time_left / 3600), 2) + ":" + tick(Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60), 2) + ":" + tick(time_left - Math.floor(time_left / 3600) * 3600 - Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60) * 60, 2));
-      }
+      $("#timer_nextbus2").text(stationTimerSetting1(3, date));
+      $("#timer_left2").text(stationTimerSetting2(3, date));
+      
+      $("#timer_nextbus3").text(stationTimerSetting1(5, date));
+      $("#timer_left3").text(stationTimerSetting2(5, date));
 
     }, 1000)
 
+    function stationTimerSetting1(offset, date) { 
+      var next_bus_val = next_bus(date.getHours(), date.getMinutes(), offset);
+      if (next_bus_val == -1) {
+        return "운행 종료";
+      } else {
+        var next_bus_time = array1[next_bus_val] + offset;
+        return tick(Math.floor(next_bus_time / 60), 2) + ":" + tick(Math.floor(next_bus_time - Math.floor(next_bus_time / 60) * 60), 2) + ":00";
+      }
+    }
+
+    function stationTimerSetting2(offset, date) {
+      var next_bus_val = next_bus(date.getHours(), date.getMinutes(), offset);
+      if (next_bus_val == -1) {
+        return "운행 종료";
+      } else {
+        var next_bus_time = array1[next_bus_val] + offset;
+        var time_left = Math.floor(next_bus_time / 60) * 3600 + Math.floor(next_bus_time - Math.floor(next_bus_time / 60) * 60) * 60 - (date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds());
+        return tick(Math.floor(time_left / 3600), 2) + ":" + tick(Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60), 2) + ":" + tick(time_left - Math.floor(time_left / 3600) * 3600 - Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60) * 60, 2);
+      }
+    }
+
+
+    function int2str(num) {
+      var hr = tick(Math.floor(num/60),2);
+      var min = tick(num - Math.floor(num/60)*60, 2);
+      return hr + "시 " + min + "분";
+    }
 
     function tick(num, size) {
       var s = num + "";
@@ -67,16 +89,22 @@
       return -1;
     }
 
+    function contentsMaker(offset) {
+      var contents = "";
+      for (i = 0; i < array1.length; i++) {
+        contents += "<tr><td>" + (i+1) + "</td><td style='text-align: right;'>" + int2str(array1[i]+offset) + "</td></tr>";
+      }
+      return contents;
+    }
     $(document).ready(function () {
       $('[data-toggle="tooltip_noWeekends"]').tooltip();
       $('[data-toggle="tooltip"]').tooltip();
 
-      var contents = "";
-      for (i = 1; i < 12; i++) {
-        contents += "<tr><td>" + i + "</td><td>" + i * 30 + "</td><td>-</td></tr>";
-      }
-      console.log(contents);
-      $('#ttProvider').append(contents);
+      $('#ttProvider').append(contentsMaker(0));
+      $('#ttProvider2').append(contentsMaker(3));
+      $('#ttProvider3').append(contentsMaker(5));
+
+
     });
   </script>
 
@@ -90,6 +118,25 @@
       }
     }
 
+* {
+  font-size:0.925rem;
+}
+
+td {
+  font-size:1rem;
+}
+
+th {
+  font-size:1rem;
+}
+
+i {
+  font-size:1.2rem;
+}
+    .navbar {
+      padding-top:2px;
+      padding-bottom:2px;
+    }
     .border {
       display: inline-block;
       margin: 0px;
@@ -99,7 +146,7 @@
     }
 
     body {
-      padding-top: 56px;
+      padding-top: 36px;
     }
 
     a {
@@ -158,7 +205,7 @@
           <a class="nav-link" href="#">OLEV 주중</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" data-toggle="tooltip_noWeekends" data-placement="top"
+          <a class="nav-link" href="#" data-toggle="tooltip_noWeekends" data-placement="right"
             title="운행하지 않습니다.">주말/공휴일</a>
         </li>
       </ul>
@@ -182,10 +229,8 @@
           <a class="nav-link" data-toggle="tab" href="#tab3">정류장 3</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#tab4">정류장 4</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#tab5">정류장 5</a>
+          <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom"
+          title="준비중입니다.">정류장 4</a>
         </li>
       </ul>
     </div>
@@ -226,13 +271,10 @@
           <thead>
             <tr>
               <th>회차</th>
-              <th>시간</th>
-              <th>기타</th>
+              <th style="text-align:right;">시간</th>
             </tr>
           </thead>
           <tbody id='ttProvider'>
-
-
           </tbody>
         </table>
 
@@ -261,24 +303,62 @@
             </div>
           </div>
         </div>
+
+          <table class="table table-hover" style="margin-top:12px;">
+              <thead>
+                <tr>
+                  <th>회차</th>
+                  <th style="text-align:right;">시간</th>
+                </tr>
+              </thead>
+              <tbody id='ttProvider2'>
+              </tbody>
+          </table>
+        
       </div>
-      <div id="tab3" class="container tab-pane "><br>
-        <h3>주중 시간표 3</h3>
-        <p>?</p>
-      </div>
-      <div id="tab4" class="container tab-pane "><br>
-        <h3>주중 시간표 4</h3>
-        <p>?</p>
-      </div>
-      <div id="tab5" class="container tab-pane "><br>
-        <h3>주중 시간표 5</h3>
-        <p>?</p>
-      </div>
-    </div>
+      <div id="tab3" class="container tab-pane">
+          <div class="card bg-light text-dark text-center" style="margin-top:18px; margin-bottom:18px;">
+            <div class="card-body">
+              <div class="container">
+                <div class="row" style="font-size:24px;">
+                  <div class="col-4">
+                    <h4 data-toggle="tooltip" data-placement="top" title="현재 시각"><i class="far fa-clock"></i></h4>
+                    <div class="spinner-border text-danger spinner-timer"></div>
+                    <span id="timer3" style="margin-bottom:0;"></span>
+                  </div>
+                  <div class="col-4">
+                    <h4 data-toggle="tooltip" data-placement="top" title="다음 버스 시각"><i class="fas fa-bus"></i></h4>
+                    <div class="spinner-border text-danger spinner-timer"></div>
+                    <span id="timer_nextbus3" style="margin-bottom:0;"></span>
+                  </div>
+                  <div class="col-4" style="color:dodgerblue;">
+                    <h4 data-toggle="tooltip" data-placement="top" title="남은 시간"><i class="fas fa-stopwatch"></i></h4>
+                    <div class="spinner-border text-danger spinner-timer"></div>
+                    <span id="timer_left3" style="margin-bottom:0;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+            <table class="table table-hover" style="margin-top:12px;">
+                <thead>
+                  <tr>
+                    <th>회차</th>
+                    <th style="text-align:right;">시간</th>
+                  </tr>
+                </thead>
+                <tbody id='ttProvider3'>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      
+    
   </div>
 
   <footer style="background-color:#3e2723; color:white;">
-    <div class="container" style="padding-top:8px; padding-bottom:8px;">
+    <div class="container" style="padding-top:12px; padding-bottom:12px;">
       <span class="float-right"><a href="#" style="color:#fdd835;">Back to top</a></span>
       <span style="color:white">Work In Progress</span>
     </div>
