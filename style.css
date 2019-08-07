@@ -84,6 +84,11 @@ a {
     display: inline-block;
 }
 
+.bus-title {
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;

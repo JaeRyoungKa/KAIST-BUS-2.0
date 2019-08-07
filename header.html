@@ -1,5 +1,9 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" style="background-color:#413b98 !important; padding-top:6px; padding-bottom:6px;">
-    <a class="navbar-brand abs" href="#" style="font-weight: 600;">카이스트 버스</a>
+    <a class="navbar-brand abs" href="#" style="font-weight: 600;">카이스트 버스 2.0</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <span style="font-size:16px; color:white; opacity: 0.90;">노선</span>
@@ -24,6 +28,36 @@
                 </div>
             </div>
 
+            <div class="dropdown">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">문지</a>
+                </li>
+                <div class="dropdown-content">
+                    <a class="nav-link" href="./munji_weekdays_inbound.html">본교행 주중</a>
+                    <a class="nav-link" href="./munji_weekdays_outbound.html">화암행 주중</a>
+                    <a class="nav-link" href="./munji_weekends_inbound.html">본교행 주말/공휴일</a>
+                    <a class="nav-link" href="./munji_weekends_outbound.html">화암행 주말/공휴일</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">화암</a>
+                </li>
+                <div class="dropdown-content">
+                    <a class="nav-link" href="./hwaam_weekdays.html">문지/본교행 주중</a>
+                    <a class="nav-link" href="./hwaam_weekends.html">문지/본교행 주말/공휴일</a>
+                </div>
+            </div>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="./commute.html">통근버스</a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="tooltip_toSeoul" title="금요일 17시 45분 강당 출발, 포탈 사전 예약 필요">서울행</a>
+            </li>
+
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -34,3 +68,9 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="tooltip_toSeoul"]').tooltip();
+    });
+</script>
