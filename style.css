@@ -92,9 +92,9 @@ a {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #40afa0;
-    opacity: 0.9;
-    min-width: 84px;
+    background-color: #4070af;
+    opacity: 1;
+    min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
@@ -108,7 +108,7 @@ a {
 }
 
 .dropdown-content a:hover {
-    background-color: #2b796e;
+    background-color: #2e507c;
 }
 
 .dropdown:hover .dropdown-content {
