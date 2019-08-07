@@ -140,6 +140,7 @@
 
         $(function() {
             $("#header").load("./header.html");
+            $("#footer").load("./footer.html");
         });
     </script>
 
@@ -147,19 +148,13 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" style="background-color:#413b98 !important; padding-top:6px; padding-bottom:6px;">
-        <a class="navbar-brand abs" href="#" style="font-weight: 600;">카이스트 버스 - OLEV</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-            <!-- <span class="navbar-toggler-icon"></span> -->
-            <span style="font-size:16px; color:white; opacity: 0.90;">노선</span>
-        </button>
-        <div class="navbar-collapse collapse" id="collapsingNavbar">
-            <div id="header"></div>
-        </div>
-    </nav>
+    <div id="header"></div>
 
-
-
+    <div class="container" style="margin-top:4px; margin-bottom:12px;">
+        <h3>
+            OLEV 시간표 <small>주중</small>
+        </h3>
+    </div>
 
     <nav class="navbar navbar-light navbar-expand bg-faded justify-content-center" style="background-color:rgb(250, 245, 255) !important; padding-top:6px; padding-bottom:6px;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
@@ -203,6 +198,8 @@
             </ul>
         </div>
     </nav>
+
+
 
     <div class="container">
         <div class="alert alert-info alert-dismissible" style="margin-top:12px;">
@@ -882,23 +879,7 @@
 
 
 
-    <footer style="background-color:#413b98; color:white;">
-        <div class="container" style="padding-top:12px; padding-bottom:12px;">
-            <div class="row">
-                <div class="col-8">
-                    <a href="#" style="color:white; text-decoration:none;">피드백 / 정보 제공하기</a>
-                </div>
-                <div class="col-4">
-                    <a href="./about.html" class="float-right" style="color:white; text-decoration:none;">About</a>
-                </div>
-                <div class="col-9">
-                    <span style="opacity: 0.8;">(최종 업데이트: 2019년 7월 1일)</span>
-                </div>
-                <div class="col-3">
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer"></div>
 </body>
 
 </html>
