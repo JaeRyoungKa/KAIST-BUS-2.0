@@ -100,8 +100,8 @@ a {
 }
 
 .caret-off {
-    background-color: #413b98;
-    border-color: #413b98;
+    background-color: #413b98 !important;
+    border-color: #413b98 !important;
 }
 
 .caret-off:hover {
