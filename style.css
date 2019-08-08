@@ -147,6 +147,7 @@ a {
 .carousel-indicators li {
     width: 10px !important;
     height: 10px !important;
+    display: none;
 }
 
 #carousel_main {
@@ -154,10 +155,14 @@ a {
     max-height: 100px;
     max-width: 1000px;
     margin: auto;
-    display: none;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     display: none;
+}
+
+#carousel_main:hover .carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: block;
 }
