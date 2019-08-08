@@ -105,8 +105,8 @@ a {
 }
 
 .caret-off:hover {
-    background-color: #413b98;
-    border-color: #413b98;
+    background-color: #35307e !important;
+    border-color: #35307e !important;
 }
 
 .caret-off:focus,
