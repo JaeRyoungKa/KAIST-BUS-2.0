@@ -162,7 +162,10 @@ a {
     display: none;
 }
 
-#carousel_main:hover .carousel-control-prev-icon,
-.carousel-control-next-icon {
+#carousel_main:hover .carousel-control-prev-icon {
+    display: block;
+}
+
+#carousel_main:hover .carousel-control-next-icon {
     display: block;
 }
