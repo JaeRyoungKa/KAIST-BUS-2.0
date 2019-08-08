@@ -154,4 +154,10 @@ a {
     max-height: 100px;
     max-width: 1000px;
     margin: auto;
+    display: none;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: none;
 }
