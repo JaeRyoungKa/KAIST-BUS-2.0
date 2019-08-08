@@ -118,3 +118,7 @@ a {
     background-color: #35307e !important;
     border-color: #35307e !important;
 }
+
+.btn-group {
+    display: block;
+}
