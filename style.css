@@ -168,9 +168,9 @@ a {
 }
 
 #carousel_main:hover .carousel-control-prev-icon {
-    display: block;
+    display: inline-block;
 }
 
 #carousel_main:hover .carousel-control-next-icon {
-    display: block;
+    display: inline-block;
 }
