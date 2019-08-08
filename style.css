@@ -96,10 +96,15 @@ a {
 }
 
 .caret-off::after {
-    display: none;
+    display: none !important;
 }
 
 .caret-off {
+    background-color: #413b98;
+    border-color: #413b98;
+}
+
+.caret-off:hover {
     background-color: #413b98;
     border-color: #413b98;
 }
