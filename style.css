@@ -113,3 +113,8 @@ a {
 .caret-off.focus {
     box-shadow: 0 0 0 .2rem #413b98 !important;
 }
+
+.show>.btn-info.dropdown-toggle {
+    background-color: #35307e !important;
+    border-color: #35307e !important;
+}
