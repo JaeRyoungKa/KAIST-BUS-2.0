@@ -125,6 +125,7 @@ a {
 
 .caret-off a {
     color: white;
+    text-decoration: none;
 }
 
 .btn-group .dropdown-menu {
