@@ -12,6 +12,13 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.bus-title {
+    margin-bottom: .5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: 1.5rem;
+}
+
 .timers span {
     font-size: 1.3rem;
 }
@@ -79,39 +86,22 @@ a {
     opacity: 0.9;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
 .bus-title {
-    margin-top: 28px;
+    margin-top: 24px;
     margin-bottom: 12px;
 }
 
-.dropdown-content {
+.caret-off::before {
     display: none;
-    position: absolute;
-    background-color: #4070af;
-    opacity: 1;
-    min-width: 200px;
-    padding-left: 15px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    background-color: #413b98;
 }
 
-.dropdown-content a {
-    color: white !important;
-    padding: 8px 12px;
-    margin-left: 4px;
-    text-decoration: none;
-    display: block;
+.caret-off::after {
+    display: none;
+    background-color: #413b98;
 }
 
-.dropdown-content a:hover {
-    background-color: #2e507c;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+.caret-off:focus,
+.caret-off.focus {
+    box-shadow: 0 0 0 .2rem #413b98;
 }
