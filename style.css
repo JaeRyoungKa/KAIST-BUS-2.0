@@ -100,7 +100,8 @@ a {
 }
 
 .caret-off {
-    background-color: #413b98 !important;
+    background-color: #413b98;
+    border-color: #413b98;
 }
 
 .caret-off:focus,
