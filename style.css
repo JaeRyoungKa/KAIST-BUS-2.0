@@ -93,15 +93,17 @@ a {
 
 .caret-off::before {
     display: none;
-    background-color: #413b98;
 }
 
 .caret-off::after {
     display: none;
-    background-color: #413b98;
+}
+
+.caret-off {
+    background-color: #413b98 !important;
 }
 
 .caret-off:focus,
 .caret-off.focus {
-    box-shadow: 0 0 0 .2rem #413b98;
+    box-shadow: 0 0 0 .2rem #413b98 !important;
 }
