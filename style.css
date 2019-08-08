@@ -102,7 +102,6 @@ a {
 .caret-off {
     background-color: #413b98 !important;
     border-color: #413b98 !important;
-    margin-bottom: 6px;
 }
 
 .caret-off:hover {
@@ -122,4 +121,12 @@ a {
 
 .btn-group {
     display: block;
+}
+
+.caret-off a {
+    color: white;
+}
+
+.btn-group .dropdown-menu {
+    margin-top: 6px;
 }
