@@ -29,6 +29,20 @@
             isWeekends = true;
         }
 
+        setInterval(function() {
+            date.setSeconds(date.getSeconds() + 1);
+            var time = tick(date.getHours(), 2) + ":" + tick(date.getMinutes(), 2) + ":" + tick(date.getSeconds(), 2);
+            $('.current_timer').text(time);
+            $(".spinner-timer").hide();
+
+        }, 1000)
+
+        function tick(num, size) {
+            var s = num + "";
+            while (s.length < size) s = "0" + s;
+
+            return s;
+        }
 
         $(function() {
             $("#index-date").text(date.getFullYear() + "년 " + (date.getMonth() + 1) + "월 " + date.getDate() + "일");
@@ -49,9 +63,26 @@
         <i class="far fa-calendar-check"></i> <mark id="index-date" style="font-size: 1.5rem;"></mark> <small id="index-isWeekends"></small>
     </div>
 
-    <div class="container" style="padding-top:12px; padding-bottom:12px;">
+    <div class="container">
+        <div class="card bg-light text-light text-center index-time" style="margin-top:18px; margin-bottom:18px;">
+            <div class="card-body">
+                <div class="container timers">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 style="margin-top:7px;" data-toggle="tooltip" data-placement="top" title="현재 시각"><i class="far fa-clock"></i> 현재 시각</h4>
+                            <div class="spinner-border text-info spinner-timer"></div>
+                            <span class="current_timer" style="margin-bottom:0; font-size:2.5rem;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container" style="padding-top:2px; padding-bottom:12px;">
         <div class="row" style="margin-bottom:12px;">
-            <div class="col-6">
+            <div class="col-6 col-6-left">
                 <div class="btn-group">
                     <a href="./olev.html">
                         <button class="btn btn-info index-button caret-off" type="button">
@@ -60,7 +91,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-6-right">
                 <a href="./wolpyeong.html">
                     <button class="btn btn-info index-button caret-off" type="button">
                             시내순환
@@ -69,7 +100,7 @@
             </div>
         </div>
         <div class="row" style="margin-bottom:12px;">
-            <div class="col-6">
+            <div class="col-6 col-6-left">
                 <div class="card bg-light text-dark text-center">
                     <div class="btn-group dropright">
                         <button class="btn btn-info caret-off index-button dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -85,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-6-right">
                 <div class="btn-group dropright">
                     <button class="btn btn-info caret-off index-button dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     화암 출발
@@ -99,7 +130,7 @@
             </div>
         </div>
         <div class="row" style="margin-bottom:12px;">
-            <div class="col-6">
+            <div class="col-6 col-6-left">
                 <a href="./commute.html">
                     <button class="btn btn-info index-button caret-off" type="button">
                                 통근버스
