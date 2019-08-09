@@ -92,7 +92,7 @@ a {
 }
 
 .caret-off::before {
-    display: none;
+    display: none !important;
 }
 
 .caret-off::after {
