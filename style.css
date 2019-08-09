@@ -171,11 +171,11 @@ a {
 }
 
 .col-6-left {
-    padding-right: 5px;
+    padding-right: 10px;
 }
 
 .col-6-right {
-    padding-left: 5px;
+    padding-left: 0px;
 }
 
 .index-time {
