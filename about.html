@@ -13,6 +13,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZPGD7LLE5D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZPGD7LLE5D');
+    </script>
     <script>
         $(function() {
             $("#header").load("./header.html");
@@ -27,26 +39,30 @@
     <div id="header"></div>
 
 
-    <div class="container">
-        <div class="card bg-white text-dark text-center" style="width:100%; margin-top:15px; margin-bottom:15px;">
+    <div class="container about-container">
+        <h4 style="margin-bottom:15px;">About 카이스트 버스</h4>
+        <div class="card bg-light text-dark text-center">
+            <div class="card-header">
+                2019년 8월 11일
+            </div>
             <div class="card-body">
                 <div class="col-12" style="text-align: left;">
-                    <h3 style="margin-bottom:15px;">업데이트 내역</h3>
-                    <h5>2019년 8월 10일 To-Do</h5>
-                    <p>통근버스, 본교출발 노선 구현</p>
-                    <p>안드로이드 및 iOS 앱 구현</p>
-                    <p>구글 애널리틱스 구현 및 업데이트 내역 페이지 디자인 개선</p>
+                    <p><mark>최종 작업 진행</mark></p>
+                    <p>안드로이드 앱 구현</p>
                 </div>
             </div>
         </div>
 
-        <div class="card bg-white text-dark text-center" style="width:100%; margin-bottom:15px;">
+        <div class="card bg-dark text-light text-center">
+            <div class="card-header">
+                기여한 사람들
+            </div>
             <div class="card-body">
                 <div class="col-12" style="text-align: left;">
-                    <h3 style="margin-bottom:15px;">기여한 사람들</h3>
                     <p>Jaeryoung Ka (2019~, v2.0)</p>
                     <p>Joonyoung Yi (2018~)</p>
                     <p>Dongwoo Kim (2014 ~ 2017)</p>
+                    <p></p>
                 </div>
             </div>
         </div>

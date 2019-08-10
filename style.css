@@ -76,6 +76,34 @@ a {
     color: black;
 }
 
+.about-container p {
+    margin-left: -1px;
+    margin-bottom: 6px;
+}
+
+.about-container .card-body {
+    margin-top: -4px;
+    margin-bottom: -8px;
+}
+
+.about-container .card {
+    margin-bottom: 12px;
+}
+
+.about-container .card .card-header {
+    text-align: left;
+    font-weight: 900;
+    font-size: 1.05rem;
+}
+
+.about-container h5 {
+    margin-left: -8px;
+}
+
+.nav-item a {
+    color: white;
+}
+
 .nav-pills .nav-link.active {
     background-color: #413b98;
     opacity: 0.85;
@@ -87,8 +115,8 @@ a {
 }
 
 .bus-title {
-    margin-top: 18px;
-    margin-bottom: 12px;
+    margin-top: 22px;
+    margin-bottom: 16px;
 }
 
 .caret-off::before {
@@ -179,9 +207,10 @@ a {
 }
 
 .index-time {
-    background: linear-gradient(135deg, #C56CD6 0%, #3425AF 100%);
+    background: linear-gradient(135deg, #C56CD6 0%, #413b98 100%);
 }
 
 .tab-pane .card {
-    background: linear-gradient(135deg, #f02fc238 0%, #6094ea38 100%);
+    background: linear-gradient(135deg, #7367f0 0%, #3425AF 100%);
+    color: white !important;
 }

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" style="background-color:#413b98 !important; padding-top:6px; padding-bottom:6px;">
     <a class="navbar-brand abs" href="./index.html" style="font-weight: 600;">카이스트 버스 2.0</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+    <button class="" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <span style="font-size:16px; color:white; opacity: 0.90;">노선</span>
     </button>
@@ -23,12 +23,16 @@
                 </a>
             </div>
 
-            <div class="btn-group">
-                <a href="./commute.html">
-                    <button class="btn btn-info caret-off" type="button">
-                                통근버스
-                        </button>
-                </a>
+
+            <div class="btn-group dropright">
+                <button class="btn btn-info caret-off dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        통근버스
+                                    </button>
+                <div class="dropdown-menu">
+                    <h6 class="dropdown-header">통근버스 시간표</h6>
+                    <a class="dropdown-item" href="./commute_inbound.html">출근 노선</a>
+                    <a class="dropdown-item" href="./commute_outbound.html">퇴근 노선</a>
+                </div>
             </div>
 
             <div class="btn-group">
@@ -51,6 +55,9 @@
                     <a class="dropdown-item" href="./main_weekends.html">주말/공휴일</a>
                 </div>
             </div>
+
+            <hr class="col-10 d-none d-md-block" style="border: 2px solid white;">
+
 
             <div class="btn-group dropleft">
                 <button class="btn btn-info caret-off dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,12 +85,9 @@
                 </div>
             </div>
 
-
-
             <li class="nav-item">
                 <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">App 다운로드 <span
                         class="badge badge-light">WIP</span> </a>
-
             </li>
         </ul>
     </div>

@@ -13,6 +13,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZPGD7LLE5D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZPGD7LLE5D');
+    </script>
     <script>
         var array1 = [525, 535, 555, 565, 585, 595, 615, 625, 645, 655, 675, 685, 705, 775, 795, 805, 825, 835, 855, 865, 885, 895, 915, 925, 945, 955, 975, 985, 1005, 1015];
         var delay = [0, 1, 3, 4, 6, 7, 8, 9, 10, 11, 12];
@@ -20,7 +32,7 @@
         var date = new Date();
 
         setInterval(function() {
-            date.setSeconds(date.getSeconds() + 1);
+            var date = new Date();
             var time = tick(date.getHours(), 2) + ":" + tick(date.getMinutes(), 2) + ":" + tick(date.getSeconds(), 2);
             $('.current_timer').text(time);
 
@@ -66,7 +78,7 @@
 
             $(".spinner-timer").hide();
 
-        }, 1000)
+        }, 500)
 
         function stationTimerSetting1(offset, date) {
             var next_bus_val = next_bus(date.getHours(), date.getMinutes(), offset);
@@ -144,7 +156,7 @@
             $("#carousel").load("./carousel.html");
         });
     </script>
-
+    <script src="./warningForWeekdays.js"></script>
 </head>
 
 <body>
@@ -155,7 +167,7 @@
         <i class="far fa-calendar-check"></i> <mark style="font-size: 1.5rem;">OLEV 시간표</mark> <small>주중</small>
     </div>
 
-    <nav class="navbar navbar-light navbar-expand bg-faded justify-content-center" style="background-color:rgb(250, 245, 255) !important; padding-top:6px; padding-bottom:6px;">
+    <nav class="navbar navbar-light navbar-expand bg-faded justify-content-center" style="background:linear-gradient(135deg, #7117ea 0%,#9b30b9 100%) !important; padding-top:6px; padding-bottom:6px;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -198,9 +210,7 @@
         </div>
     </nav>
 
-
-
-
+    <div id="warningForDaysInversion"></div>
 
     <div class="container">
         <div class="tab-content">
@@ -210,14 +220,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -273,14 +283,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left2" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -333,14 +343,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left3" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -393,14 +403,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left4" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -453,14 +463,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left5" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -513,14 +523,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left6" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -573,14 +583,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left7" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -633,14 +643,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left8" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -693,14 +703,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left9" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -753,14 +763,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left10" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
@@ -813,14 +823,14 @@
                         <div class="container timers">
                             <div class="row">
 
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
 
                                 </div>
-                                <div class="col-6" style="color:#413b98; text-align: center;">
+                                <div class="col-6" style="  text-align: center;">
                                     <div class="spinner-border text-info spinner-timer"></div>
                                     <div style="display:inline-block; text-align: center;"> <span id="timer_left11" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
                                 </div>
