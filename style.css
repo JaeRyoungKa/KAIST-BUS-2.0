@@ -214,3 +214,12 @@ a {
     background: linear-gradient(135deg, #7367f0 0%, #3425AF 100%);
     color: white !important;
 }
+
+.header-mobile-button {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.header-mobile-button:focus {
+    outline: none;
+}
