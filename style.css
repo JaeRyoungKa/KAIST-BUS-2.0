@@ -108,6 +108,10 @@ a {
     color: white;
 }
 
+.nav-item a:active {
+    color: white;
+}
+
 .nav-pills .nav-link.active {
     background-color: #00000040;
 }
