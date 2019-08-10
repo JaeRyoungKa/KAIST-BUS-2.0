@@ -13,7 +13,7 @@ if (day == 0 || day == 6) {
     isWeekends = true;
 }
 
-if (isWeekends) {
+if (!isWeekends) {
     var warningSign = '<div class="container">';
     warningSign += '<div class="alert alert-danger" style="margin-top:12px;">';
     warningSign += '<strong>주중/휴일 재확인</strong><br>';
