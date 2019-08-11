@@ -144,6 +144,24 @@
             return contents;
         }
 
+        function contentsMakerExpress(offset) {
+            var contents = "";
+            for (i = 0; i < array1.length; i++) {
+                var isExpressBus = false;
+                for (var j = 0; j < expressBus.length; j++) {
+                    if (expressBus[j] == i) {
+                        isExpressBus = true;
+                    }
+                }
+                if (isExpressBus) {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='padding-left:0; padding-right:0;'>직행</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                } else {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td></td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                }
+            }
+            return contents;
+        }
+
         function contentsMaker(offset) {
             var contents = "";
             for (i = 0; i < array1.length; i++) {
@@ -154,9 +172,9 @@
                     }
                 }
                 if (isExpressBus) {
-                    contents += "<tr><td>" + (i + 1) + "</td><td style='color:#413b98;'>" + "" + "</td><td style='text-align: right;'>" + int2str(array1[i] + offset) + "</td></tr>";
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td></td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
                 } else {
-                    contents += "<tr><td>" + (i + 1) + "</td><td>" + "" + "</td><td style='text-align: right;'>" + int2str(array1[i] + offset) + "</td></tr>";
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td></td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
                 }
             }
             return contents;
@@ -333,9 +351,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th width="85%">회차</th>
-                            <th width="5%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:88px; text-align:right;">시간</th>
+                            <th width="48%" stlye="min-width:300px;">도착 예정 시간</th>
+                            <th width="0%" style="min-width:30px; padding-left:0; padding-right:0;">직행</th>
+                            <th width="52%" style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider2'>
@@ -394,9 +412,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th width="85%">회차</th>
-                            <th width="5%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:88px; text-align:right;">시간</th>
+                            <th width="48%" stlye="min-width:300px;">도착 예정 시간</th>
+                            <th width="0%" style="min-width:30px; padding-left:0; padding-right:0;">직행</th>
+                            <th width="52%" style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider3'>
@@ -455,9 +473,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th width="85%">회차</th>
-                            <th width="5%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:88px; text-align:right;">시간</th>
+                            <th width="48%" stlye="min-width:300px;">도착 예정 시간</th>
+                            <th width="0%" style="min-width:30px; padding-left:0; padding-right:0;">직행</th>
+                            <th width="52%" style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider4'>
@@ -516,9 +534,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th width="85%">회차</th>
-                            <th width="5%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:88px; text-align:right;">시간</th>
+                            <th width="48%" stlye="min-width:300px;">도착 예정 시간</th>
+                            <th width="0%" style="min-width:30px; padding-left:0; padding-right:0;">직행</th>
+                            <th width="52%" style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider5'>
