@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#413b98">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
@@ -47,6 +48,17 @@
             var time = tick(date.getHours(), 2) + ":" + tick(date.getMinutes(), 2) + ":" + tick(date.getSeconds(), 2);
             $('.current_timer').text(time);
             $(".spinner-timer").hide();
+
+            for (var k = 0; k < array1.length; k++) {
+                for (var k2 = 0; k2 < delay.length; k2++) {
+                    var timeRemaining = array1[k] * 60 + delay[k2] * 60 - date.getHours() * 3600 - date.getMinutes() * 60 - date.getSeconds();
+                    if (timeRemaining > 0) {
+                        $("#timeLeft" + delay[k2] + tick(k, 2)).text((int2strTimeLeft(timeRemaining)));
+                    } else {
+                        $("#timeLeft" + delay[k2] + tick(k, 2)).text(("-"));
+                    }
+                }
+            }
 
         }, 500)
 
@@ -190,5 +202,17 @@
 
     <div id="footer"></div>
 </body>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        console.log("Will the service worker register?");
+        navigator.serviceWorker.register('service-worker.js')
+            .then(function(reg) {
+                console.log("Yes, it did.");
+            }).catch(function(err) {
+                console.log("No it didn't. This happened:", err)
+            });
+    }
+</script>
 
 </html>

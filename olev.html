@@ -78,6 +78,16 @@
 
             $(".spinner-timer").hide();
 
+            for (var k = 0; k < array1.length; k++) {
+                for (var k2 = 0; k2 < delay.length; k2++) {
+                    var timeRemaining = array1[k] * 60 + delay[k2] * 60 - date.getHours() * 3600 - date.getMinutes() * 60 - date.getSeconds();
+                    if (timeRemaining > 0) {
+                        $("#timeLeft" + delay[k2] + tick(k, 2)).text((int2strTimeLeft(timeRemaining)));
+                    } else {
+                        $("#timeLeft" + delay[k2] + tick(k, 2)).text(("-"));
+                    }
+                }
+            }
         }, 500)
 
         function stationTimerSetting1(offset, date) {
@@ -101,11 +111,17 @@
             }
         }
 
-
         function int2str(num) {
             var hr = tick(Math.floor(num / 60), 2);
             var min = tick(num - Math.floor(num / 60) * 60, 2);
             return hr + "시 " + min + "분";
+        }
+
+        function int2strTimeLeft(num) {
+            var hr = tick(Math.floor(num / 3600), 1);
+            var min = tick(Math.floor(tick(num - Math.floor(num / 3600) * 3600, 2) / 60), 1);
+            var sec = tick(num - hr * 3600 - min * 60, 2)
+            return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
         }
 
         function tick(num, size) {
@@ -129,7 +145,7 @@
         function contentsMaker(offset) {
             var contents = "";
             for (i = 0; i < array1.length; i++) {
-                contents += "<tr><td>" + (i + 1) + "</td><td style='text-align: right;'>" + int2str(array1[i] + offset) + "</td></tr>";
+                contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='text-align: right;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
             }
             return contents;
         }
@@ -224,7 +240,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -265,8 +281,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider'>
@@ -287,7 +303,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -328,8 +344,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider2'>
@@ -347,7 +363,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -388,8 +404,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider3'>
@@ -407,7 +423,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -448,8 +464,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider4'>
@@ -467,7 +483,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -508,8 +524,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider5'>
@@ -527,7 +543,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -568,8 +584,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider6'>
@@ -587,7 +603,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -628,8 +644,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider7'>
@@ -647,7 +663,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -688,8 +704,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider8'>
@@ -707,7 +723,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -748,8 +764,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider9'>
@@ -767,7 +783,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -808,8 +824,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider10'>
@@ -827,7 +843,7 @@
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
-                                <div class="col-2" style="position:absolute; border-left: 3px solid gray; opacity: 0.65; height:44px; padding:0; left: 50%;">
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
                                 </div>
                                 <div class="col-6" style="  text-align: center;">
@@ -868,8 +884,8 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>회차</th>
-                            <th style="text-align:right;">시간</th>
+                            <th>도착 예정 시간</th>
+                            <th style="text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider11'>
