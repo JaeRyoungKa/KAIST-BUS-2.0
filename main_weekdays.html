@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>KAIST 버스 2.0</title>
+    <title>KAIST 버스 2.0 - 본교 출발 (주중)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#413b98">
@@ -109,7 +109,7 @@
             return -1;
         }
 
-        function contentsMaker(offset) {
+        function contentsMakerExpress(offset) {
             var contents = "";
             for (i = 0; i < array1.length; i++) {
                 var isExpressBus = false;
@@ -126,11 +126,29 @@
             }
             return contents;
         }
+
+        function contentsMaker(offset) {
+            var contents = "";
+            for (i = 0; i < array1.length; i++) {
+                var isExpressBus = false;
+                for (var j = 0; j < expressBus.length; j++) {
+                    if (expressBus[j] == i) {
+                        isExpressBus = true;
+                    }
+                }
+                if (isExpressBus) {
+                    contents += "<tr><td>" + (i + 1) + "</td><td style='color:#413b98;'>" + "" + "</td><td style='text-align: right;'>" + int2str(array1[i] + offset) + "</td></tr>";
+                } else {
+                    contents += "<tr><td>" + (i + 1) + "</td><td>" + "" + "</td><td style='text-align: right;'>" + int2str(array1[i] + offset) + "</td></tr>";
+                }
+            }
+            return contents;
+        }
         $(document).ready(function() {
             $('[data-toggle="tooltip_noWeekends"]').tooltip();
             $('[data-toggle="tooltip"]').tooltip();
 
-            $('#ttProvider').append(contentsMaker(delay[0]));
+            $('#ttProvider').append(contentsMakerExpress(delay[0]));
             $('#ttProvider2').append(contentsMaker(delay[1]));
             $('#ttProvider3').append(contentsMaker(delay[2]));
             $('#ttProvider4').append(contentsMaker(delay[3]));
@@ -492,8 +510,8 @@
     </div>
 
     <div class="container">
-        <div class="alert alert-primary" style="margin-top:12px;">
-            <strong>화암 직행: </strong> 방학 기간 중에는 화암행 직행 버스가 운행되지 않습니다.
+        <div class="alert alert-primary" style="margin-top:12px; font-size:0.8rem;">
+            <strong>직행 버스</strong><br>본교에서 화암으로 직행하는 버스 노선은 방학 기간 중에는 운행되지 않습니다.
         </div>
         <div class="alert alert-info" style="margin-top:12px;">
             <strong>참고: </strong> 시내 도로 사정에 따라 각 정류장 도착 예정 시간보다 늦을 수 있습니다.

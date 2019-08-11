@@ -214,11 +214,11 @@ a {
 }
 
 .index-time {
-    background: linear-gradient(135deg, #C56CD6 0%, #413b98 100%);
+    background: linear-gradient(135deg, #9b30b9 0%, #7117ea 100%);
 }
 
 .tab-pane .card {
-    background: linear-gradient(135deg, #7367f0 0%, #3425AF 100%);
+    background: linear-gradient(135deg, #9b30b9 0%, #7117ea 100%);
     color: white !important;
 }
 
