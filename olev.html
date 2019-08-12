@@ -89,6 +89,7 @@
                     }
                 }
             }
+
         }, 500)
 
         function stationTimerSetting1(offset, date) {
@@ -168,6 +169,7 @@
             $('#ttProvider9').append(contentsMaker(delay[8]));
             $('#ttProvider10').append(contentsMaker(delay[9]));
             $('#ttProvider11').append(contentsMaker(delay[10]));
+
         });
 
         $(function() {
@@ -177,6 +179,13 @@
         });
     </script>
     <script src="./warningForWeekdays.js"></script>
+    <script>
+        setInterval(function() {
+            if (isWeekends) {
+                $(".card").css("display", "none");
+            }
+        }, 500);
+    </script>
 </head>
 
 <body>

@@ -188,6 +188,13 @@
         });
     </script>
     <script src="./warningForWeekdays.js"></script>
+    <script>
+        setInterval(function() {
+            if (isWeekends) {
+                $(".card").css("display", "none");
+            }
+        }, 500);
+    </script>
 </head>
 
 <body>

@@ -23,6 +23,10 @@
     font-size: 1.5rem;
 }
 
+.timers-invisible {
+    display: none;
+}
+
 .timers span {
     font-size: 1.3rem;
 }
