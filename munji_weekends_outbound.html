@@ -26,6 +26,7 @@
 
         gtag('config', 'G-ZPGD7LLE5D');
     </script>
+    <script src="./warningForWeekends.js"></script>
     <script>
         var array1 = [470, 560, 650, 740, 830, 920, 1010, 1100, 1190, 1280, 1370, 1460, 1550];
         var delay = [0, 10];
@@ -82,7 +83,11 @@
             var hr = tick(Math.floor(num / 3600), 1);
             var min = tick(Math.floor(tick(num - Math.floor(num / 3600) * 3600, 2) / 60), 1);
             var sec = tick(num - hr * 3600 - min * 60, 2)
-            return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
+            if (isDiff || !isDiff) {
+                return "-";
+            } else {
+                return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
+            }
         }
 
 
@@ -149,7 +154,7 @@
             $("#carousel").load("./carousel.html");
         });
     </script>
-    <script src="./warningForWeekends.js"></script>
+
 </head>
 
 <body>

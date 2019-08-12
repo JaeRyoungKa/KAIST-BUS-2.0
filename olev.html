@@ -26,6 +26,7 @@
 
         gtag('config', 'G-ZPGD7LLE5D');
     </script>
+    <script src="./warningForWeekdays.js"></script>
     <script>
         var array1 = [525, 535, 555, 565, 585, 595, 615, 625, 645, 655, 675, 685, 705, 775, 795, 805, 825, 835, 855, 865, 885, 895, 915, 925, 945, 955, 975, 985, 1005, 1015];
         var delay = [0, 1, 3, 4, 6, 7, 8, 9, 10, 11, 12];
@@ -126,7 +127,11 @@
             var hr = tick(Math.floor(num / 3600), 1);
             var min = tick(Math.floor(tick(num - Math.floor(num / 3600) * 3600, 2) / 60), 1);
             var sec = tick(num - hr * 3600 - min * 60, 2)
-            return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
+            if (isDiff) {
+                return "-";
+            } else {
+                return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
+            }
         }
 
         function tick(num, size) {
@@ -178,7 +183,7 @@
             $("#carousel").load("./carousel.html");
         });
     </script>
-    <script src="./warningForWeekdays.js"></script>
+
     <script>
         setInterval(function() {
             if (isWeekends) {

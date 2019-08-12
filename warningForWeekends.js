@@ -2,6 +2,7 @@ var date = new Date();
 var forcedWeekends = [15];
 var isWeekends = false;
 var day = date.getDay();
+var isDiff = false;
 
 for (var i = 0; i < forcedWeekends.length; i++) {
     if (date.getDate() == forcedWeekends[i]) {
@@ -25,5 +26,5 @@ if (!isWeekends) {
         $('#warningForDaysInversion').append(warningSign);
     });
 
-
+    isDiff = true;
 }
