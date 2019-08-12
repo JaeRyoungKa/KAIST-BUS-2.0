@@ -12,6 +12,10 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.badge {
+    font-family: 'Nanum Gothic';
+}
+
 .bus-title {
     margin-bottom: .5rem;
     font-weight: 700;

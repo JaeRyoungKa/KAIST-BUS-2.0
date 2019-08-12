@@ -113,6 +113,9 @@
         }
 
         function int2str(num) {
+            if (num < 0) {
+                num += 1440;
+            }
             var hr = tick(Math.floor(num / 60), 2);
             var min = tick(num - Math.floor(num / 60) * 60, 2);
             return hr + "시 " + min + "분";

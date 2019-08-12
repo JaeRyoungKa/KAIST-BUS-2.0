@@ -97,6 +97,9 @@
         }
 
         function int2str(num) {
+            if (num < 0) {
+                num += 1440;
+            }
             var hr = tick(Math.floor(num / 60), 2);
             var min = tick(num - Math.floor(num / 60) * 60, 2);
             return hr + "시 " + min + "분";
@@ -366,8 +369,8 @@
     </div>
 
     <div class="container">
-        <div class="alert alert-info" style="margin-top:12px;">
-            <strong>참고: </strong> 시내 도로 사정에 따라 각 정류장 도착 예정 시각보다 늦을 수 있습니다.
+        <div class="alert alert-info" style="margin-top:12px; font-size:0.78rem;">
+            <strong>참고</strong><br>시내 도로 사정에 따라 각 정류장 도착 예정 시각과 실제 도착 시각 간에 다소 차이가 있을 수 있습니다.
         </div>
         <div class="alert alert-secondary" style=" margin-top:12px; font-size:0.8rem;">
             <strong>비상 연락처 안내 </strong><br>총무팀(주간, 042-350-2315)<br>수덕관광(010-9500-3663, 010-3030-4240)

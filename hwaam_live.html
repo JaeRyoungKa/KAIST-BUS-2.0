@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>KAIST 버스 2.0 - 화암: 문지행 (휴일)</title>
+    <title>KAIST 버스 2.0 - 본교 출발 (오늘)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#413b98">
@@ -27,9 +27,15 @@
         gtag('config', 'G-ZPGD7LLE5D');
     </script>
     <script>
-        var array1 = [30, 120, 480, 570, 660, 750, 840, 930, 1020, 1110, 1200, 1290, 1380, 1470, 1560];
-        var delay = [0, 10];
-
+        var arrayWeekdays = [440, 470, 500, 530, 570, 600, 630, 660, 720, 810, 870, 930, 990, 1050, 1080, 1110, 1140, 1170, 1200, 1230, 1290, 1320, 1350, 1410, 1470, 1530, 1590];
+        var arrayWeekends = [480, 570, 660, 750, 840, 930, 1020, 1110, 1200, 1290, 1380, 1470, 1560];
+        var expressWeekdays = [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var expressWeekends = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        console.log(arrayWeekdays.length, expressWeekdays.length, arrayWeekends.length, expressWeekends.length);
+        var delay = [0, 10, 14, 30, 45];
+    </script>
+    <script src="./liveTickHelper.js"></script>
+    <script>
         var date = new Date();
 
         setInterval(function() {
@@ -53,7 +59,19 @@
             $("#timer_nextbus3").text(stationTimerSetting1(delay[2], date));
             $("#timer_left3").text(stationTimerSetting2(delay[2], date));
 
+            $("#timer_nextbus4").text(stationTimerSetting1(delay[3], date));
+            $("#timer_left4").text(stationTimerSetting2(delay[3], date));
+
+            $("#timer_nextbus5").text(stationTimerSetting1(delay[4], date));
+            $("#timer_left5").text(stationTimerSetting2(delay[4], date));
+
             $(".spinner-timer").hide();
+
+            $('#ttProvider').html(contentsMakerExpress(delay[0]));
+            $('#ttProvider2').html(contentsMaker(delay[1]));
+            $('#ttProvider3').html(contentsMaker(delay[2]));
+            $('#ttProvider4').html(contentsMaker(delay[3]));
+            $('#ttProvider5').html(contentsMaker(delay[4]));
 
             for (var k = 0; k < array1.length; k++) {
                 for (var k2 = 0; k2 < delay.length; k2++) {
@@ -78,6 +96,14 @@
             }
         }
 
+
+        function int2strTimeLeft(num) {
+            var hr = tick(Math.floor(num / 3600), 1);
+            var min = tick(Math.floor(tick(num - Math.floor(num / 3600) * 3600, 2) / 60), 1);
+            var sec = tick(num - hr * 3600 - min * 60, 2)
+            return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
+        }
+
         function stationTimerSetting2(offset, date) {
             var next_bus_val = next_bus(date.getHours(), date.getMinutes(), offset);
             if (next_bus_val == -1) {
@@ -87,14 +113,6 @@
                 var time_left = Math.floor(next_bus_time / 60) * 3600 + Math.floor(next_bus_time - Math.floor(next_bus_time / 60) * 60) * 60 - (date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds());
                 return tick(Math.floor(time_left / 3600), 2) + ":" + tick(Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60), 2) + ":" + tick(time_left - Math.floor(time_left / 3600) * 3600 - Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60) * 60, 2);
             }
-        }
-
-
-        function int2strTimeLeft(num) {
-            var hr = tick(Math.floor(num / 3600), 1);
-            var min = tick(Math.floor(tick(num - Math.floor(num / 3600) * 3600, 2) / 60), 1);
-            var sec = tick(num - hr * 3600 - min * 60, 2)
-            return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
         }
 
         function int2str(num) {
@@ -124,21 +142,42 @@
             return -1;
         }
 
+        function contentsMakerExpress(offset) {
+            var contents = "";
+            for (i = 0; i < array1.length; i++) {
+                var isExpressBus = false;
+                if (expressBus[i] == 1) {
+                    isExpressBus = true;
+                }
+                if (isExpressBus) {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='padding-left:0; padding-right:0; text-align: center;'>직행</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                } else {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td></td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                }
+            }
+            return contents;
+        }
+
         function contentsMaker(offset) {
             var contents = "";
             for (i = 0; i < array1.length; i++) {
-                contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='text-align: right;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                var isExpressBus = false;
+                for (var j = 0; j < expressBus.length; j++) {
+                    if (expressBus[j] == i) {
+                        isExpressBus = true;
+                    }
+                }
+                if (isExpressBus) {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td></td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                } else {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td></td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                }
             }
             return contents;
         }
         $(document).ready(function() {
-
             $('[data-toggle="tooltip_noWeekends"]').tooltip();
             $('[data-toggle="tooltip"]').tooltip();
-
-            $('#ttProvider').append(contentsMaker(delay[0]));
-            $('#ttProvider2').append(contentsMaker(delay[1]));
-            $('#ttProvider3').append(contentsMaker(delay[2]));
 
         });
 
@@ -148,7 +187,8 @@
             $("#carousel").load("./carousel.html");
         });
     </script>
-    <script src="./warningForWeekends.js"></script>
+    <script src="./warningForWeekdays.js"></script>
+
 </head>
 
 <body>
@@ -156,7 +196,7 @@
     <div id="header"></div>
 
     <div class="container bus-title">
-        <i class="far fa-calendar-check"></i> <mark style="font-size: 1.5rem;">화암: 문지행 시간표</mark> <small>휴일</small>
+        <i class="far fa-calendar-check"></i> <mark style="font-size: 1.5rem;">본교 출발 시간표</mark> <small id='index-date'></small>
     </div>
 
     <nav class="navbar navbar-light navbar-expand bg-faded justify-content-center" style="background:linear-gradient(135deg, #7117ea 0%,#9b30b9 100%) !important; padding-top:6px; padding-bottom:6px;">
@@ -166,10 +206,16 @@
         <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
             <ul class="nav nav-pills w-100 justify-content-center" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tab1">화암</a>
+                    <a class="nav-link active" data-toggle="tab" href="#tab1">본교</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tab2">문지</a>
+                    <a class="nav-link" data-toggle="tab" href="#tab2">교수아파트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab3">문지</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab4">화암</a>
                 </li>
             </ul>
         </div>
@@ -186,7 +232,7 @@
                             <div class="row">
 
                                 <div class="col-6" style=" text-align: center;">
-                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="도착까지 남은 시간"><i class="fas fa-stopwatch"></i> 남은
+                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
@@ -230,8 +276,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>도착 예정</th>
-                            <th style="text-align:right;">남은 시간</th>
+                            <th width="90%">도착 예정</th>
+                            <th width="0%" style="min-width:55px;">직행</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider'>
@@ -249,7 +296,7 @@
                             <div class="row">
 
                                 <div class="col-6" style=" text-align: center;">
-                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="도착까지 남은 시간"><i class="fas fa-stopwatch"></i> 남은
+                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
@@ -293,8 +340,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>도착 예정</th>
-                            <th style="text-align:right;">남은 시간</th>
+                            <th width="90%">도착 예정</th>
+                            <th width="0%" style="min-width:55px;">직행</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider2'>
@@ -309,7 +357,7 @@
                             <div class="row">
 
                                 <div class="col-6" style=" text-align: center;">
-                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="도착까지 남은 시간"><i class="fas fa-stopwatch"></i> 남은
+                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
                                         시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
@@ -353,8 +401,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th>도착 예정</th>
-                            <th style="text-align:right;">남은 시간</th>
+                            <th width="90%">도착 예정</th>
+                            <th width="0%" style="min-width:55px;">직행</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider3'>
@@ -362,11 +411,135 @@
                 </table>
             </div>
 
+            <div id="tab4" class="container tab-pane">
+                <div class="card bg-light text-dark text-center" style="margin-top:18px; margin-bottom:18px;">
+                    <div class="card-body">
+                        <div class="container timers">
+                            <div class="row">
+
+                                <div class="col-6" style=" text-align: center;">
+                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
+                                        시간</span>
+                                </div>
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
+
+                                </div>
+                                <div class="col-6" style=" text-align: center;">
+                                    <div class="spinner-border text-info spinner-timer"></div>
+                                    <div style="display:inline-block; text-align: center;"> <span id="timer_left4" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card bg-light text-dark text-center" style="margin-top:18px; margin-bottom:18px;">
+                    <div class="card-body">
+                        <div class="container timers">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 data-toggle="tooltip" data-placement="top" title="현재 시각"><i class="far fa-clock"></i></h4>
+                                    <div class="spinner-border text-info spinner-timer"></div>
+                                    <span class="current_timer" style="margin-bottom:0;"></span>
+                                </div>
+                                <div class="col-6">
+                                    <h4 data-toggle="tooltip" data-placement="top" title="다음 버스 시각"><i class="fas fa-bus"></i></h4>
+                                    <div class="spinner-border text-info spinner-timer"></div>
+                                    <span id="timer_nextbus4" style="margin-bottom:0;"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <table class="table table-hover" style="margin-top:12px;">
+                    <thead>
+                        <tr>
+                            <th width="90%">도착 예정</th>
+                            <th width="0%" style="min-width:55px;">직행</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
+                        </tr>
+                    </thead>
+                    <tbody id='ttProvider4'>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="tab5" class="container tab-pane">
+                <div class="card bg-light text-dark text-center" style="margin-top:18px; margin-bottom:18px;">
+                    <div class="card-body">
+                        <div class="container timers">
+                            <div class="row">
+
+                                <div class="col-6" style=" text-align: center;">
+                                    <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="다음 버스 도착까지의 시간"><i class="fas fa-stopwatch"></i> 남은
+                                        시간</span>
+                                </div>
+                                <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
+
+                                </div>
+                                <div class="col-6" style=" text-align: center;">
+                                    <div class="spinner-border text-info spinner-timer"></div>
+                                    <div style="display:inline-block; text-align: center;"> <span id="timer_left5" style="margin-bottom:0; font-size:1.7rem;"></span> </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card bg-light text-dark text-center" style="margin-top:18px; margin-bottom:18px;">
+                    <div class="card-body">
+                        <div class="container timers">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 data-toggle="tooltip" data-placement="top" title="현재 시각"><i class="far fa-clock"></i></h4>
+                                    <div class="spinner-border text-info spinner-timer"></div>
+                                    <span class="current_timer" style="margin-bottom:0;"></span>
+                                </div>
+                                <div class="col-6">
+                                    <h4 data-toggle="tooltip" data-placement="top" title="다음 버스 시각"><i class="fas fa-bus"></i></h4>
+                                    <div class="spinner-border text-info spinner-timer"></div>
+                                    <span id="timer_nextbus5" style="margin-bottom:0;"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <table class="table table-hover" style="margin-top:12px;">
+                    <thead>
+                        <tr>
+                            <th width="90%">도착 예정</th>
+                            <th width="0%" style="min-width:55px;">직행</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
+                        </tr>
+                    </thead>
+                    <tbody id='ttProvider5'>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
 
     <div class="container">
+        <div class="alert alert-primary" style="margin-top:12px; font-size:0.8rem;">
+            <strong>직행 버스</strong><br>화암에서 본교로 직행하는 버스가 주중에 운영되고 있습니다.
+        </div>
         <div class="alert alert-info" style="margin-top:12px; font-size:0.78rem;">
             <strong>참고</strong><br>시내 도로 사정에 따라 각 정류장 도착 예정 시각과 실제 도착 시각 간에 다소 차이가 있을 수 있습니다.
         </div>

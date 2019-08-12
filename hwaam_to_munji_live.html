@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>KAIST 버스 2.0 - 화암: 문지행 (휴일)</title>
+    <title>KAIST 버스 2.0 - 본교 출발 (오늘)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#413b98">
@@ -27,9 +27,15 @@
         gtag('config', 'G-ZPGD7LLE5D');
     </script>
     <script>
-        var array1 = [30, 120, 480, 570, 660, 750, 840, 930, 1020, 1110, 1200, 1290, 1380, 1470, 1560];
+        var arrayWeekdays = [440, 470, 500, 530, 570, 600, 630, 660, 690, 720, 810, 870, 930, 990, 1050, 1080, 1110, 1140, 1170, 1200, 1230, 1290, 1320, 1350, 1410, 1470, 1530, 1590, 1650];
+        var arrayWeekends = [480, 570, 660, 750, 840, 930, 1020, 1110, 1200, 1290, 1380, 1470, 1560];
+        var expressWeekdays = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var expressWeekends = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        console.log(arrayWeekdays.length, expressWeekdays.length, arrayWeekends.length, expressWeekends.length);
         var delay = [0, 10];
-
+    </script>
+    <script src="./liveTickHelper.js"></script>
+    <script>
         var date = new Date();
 
         setInterval(function() {
@@ -53,7 +59,19 @@
             $("#timer_nextbus3").text(stationTimerSetting1(delay[2], date));
             $("#timer_left3").text(stationTimerSetting2(delay[2], date));
 
+            $("#timer_nextbus4").text(stationTimerSetting1(delay[3], date));
+            $("#timer_left4").text(stationTimerSetting2(delay[3], date));
+
+            $("#timer_nextbus5").text(stationTimerSetting1(delay[4], date));
+            $("#timer_left5").text(stationTimerSetting2(delay[4], date));
+
             $(".spinner-timer").hide();
+
+            $('#ttProvider').html(contentsMakerExpress(delay[0]));
+            $('#ttProvider2').html(contentsMaker(delay[1]));
+            $('#ttProvider3').html(contentsMaker(delay[2]));
+            $('#ttProvider4').html(contentsMaker(delay[3]));
+            $('#ttProvider5').html(contentsMaker(delay[4]));
 
             for (var k = 0; k < array1.length; k++) {
                 for (var k2 = 0; k2 < delay.length; k2++) {
@@ -78,6 +96,14 @@
             }
         }
 
+
+        function int2strTimeLeft(num) {
+            var hr = tick(Math.floor(num / 3600), 1);
+            var min = tick(Math.floor(tick(num - Math.floor(num / 3600) * 3600, 2) / 60), 1);
+            var sec = tick(num - hr * 3600 - min * 60, 2)
+            return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
+        }
+
         function stationTimerSetting2(offset, date) {
             var next_bus_val = next_bus(date.getHours(), date.getMinutes(), offset);
             if (next_bus_val == -1) {
@@ -87,14 +113,6 @@
                 var time_left = Math.floor(next_bus_time / 60) * 3600 + Math.floor(next_bus_time - Math.floor(next_bus_time / 60) * 60) * 60 - (date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds());
                 return tick(Math.floor(time_left / 3600), 2) + ":" + tick(Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60), 2) + ":" + tick(time_left - Math.floor(time_left / 3600) * 3600 - Math.floor((time_left - Math.floor(time_left / 3600) * 3600) / 60) * 60, 2);
             }
-        }
-
-
-        function int2strTimeLeft(num) {
-            var hr = tick(Math.floor(num / 3600), 1);
-            var min = tick(Math.floor(tick(num - Math.floor(num / 3600) * 3600, 2) / 60), 1);
-            var sec = tick(num - hr * 3600 - min * 60, 2)
-            return (hr != 0 ? (hr + "시간 ") : "") + ((min != 0 || hr != 0) ? (min + "분 ") : "") + sec + "초";
         }
 
         function int2str(num) {
@@ -124,21 +142,42 @@
             return -1;
         }
 
+        function contentsMakerExpress(offset) {
+            var contents = "";
+            for (i = 0; i < array1.length; i++) {
+                var isExpressBus = false;
+                if (expressBus[i] == 1) {
+                    isExpressBus = true;
+                }
+                if (isExpressBus) {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='padding-left:0; padding-right:0; text-align: center;'>직행</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                } else {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                }
+            }
+            return contents;
+        }
+
         function contentsMaker(offset) {
             var contents = "";
             for (i = 0; i < array1.length; i++) {
-                contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='text-align: right;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                var isExpressBus = false;
+                for (var j = 0; j < expressBus.length; j++) {
+                    if (expressBus[j] == i) {
+                        isExpressBus = true;
+                    }
+                }
+                if (isExpressBus) {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                } else {
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                }
             }
             return contents;
         }
         $(document).ready(function() {
-
             $('[data-toggle="tooltip_noWeekends"]').tooltip();
             $('[data-toggle="tooltip"]').tooltip();
-
-            $('#ttProvider').append(contentsMaker(delay[0]));
-            $('#ttProvider2').append(contentsMaker(delay[1]));
-            $('#ttProvider3').append(contentsMaker(delay[2]));
 
         });
 
@@ -148,7 +187,8 @@
             $("#carousel").load("./carousel.html");
         });
     </script>
-    <script src="./warningForWeekends.js"></script>
+    <script src="./warningForWeekdays.js"></script>
+
 </head>
 
 <body>
@@ -156,13 +196,13 @@
     <div id="header"></div>
 
     <div class="container bus-title">
-        <i class="far fa-calendar-check"></i> <mark style="font-size: 1.5rem;">화암: 문지행 시간표</mark> <small>휴일</small>
+        <i class="far fa-calendar-check"></i> <mark style="font-size: 1.5rem;">본교 출발 시간표</mark> <small id='index-date'></small>
     </div>
 
     <nav class="navbar navbar-light navbar-expand bg-faded justify-content-center" style="background:linear-gradient(135deg, #7117ea 0%,#9b30b9 100%) !important; padding-top:6px; padding-bottom:6px;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
         <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
             <ul class="nav nav-pills w-100 justify-content-center" role="tablist">
                 <li class="nav-item">
@@ -187,7 +227,7 @@
 
                                 <div class="col-6" style=" text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="도착까지 남은 시간"><i class="fas fa-stopwatch"></i> 남은
-                                        시간</span>
+                                            시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
@@ -250,7 +290,7 @@
 
                                 <div class="col-6" style=" text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="도착까지 남은 시간"><i class="fas fa-stopwatch"></i> 남은
-                                        시간</span>
+                                            시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
@@ -310,7 +350,7 @@
 
                                 <div class="col-6" style=" text-align: center;">
                                     <span style="line-height: 44px; text-align: left;" data-toggle="tooltip" data-placement="top" title="도착까지 남은 시간"><i class="fas fa-stopwatch"></i> 남은
-                                        시간</span>
+                                            시간</span>
                                 </div>
                                 <div class="col-2" style="position:absolute; border-left: 2px solid white; opacity: 0.85; height:44px; padding:0; left: 50%;">
 
@@ -375,12 +415,11 @@
         </div>
     </div>
 
-
-    <div class="container" style="margin-bottom:20px;">
-        <div id="carousel"></div>
+    <div class="container " style="margin-bottom:20px; ">
+        <div id="carousel "></div>
     </div>
 
-    <div id="footer"></div>
+    <div id="footer "></div>
 </body>
 
 </html>
