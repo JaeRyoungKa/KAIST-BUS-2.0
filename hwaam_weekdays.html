@@ -127,23 +127,6 @@
             return -1;
         }
 
-        function contentsMakerExpress(offset) {
-            var contents = "";
-            for (i = 0; i < array1.length; i++) {
-                var isExpressBus = false;
-                for (var j = 0; j < expressBus.length; j++) {
-                    if (expressBus[j] == i) {
-                        isExpressBus = true;
-                    }
-                }
-                if (isExpressBus) {
-                    contents += "<tr><td>" + (i + 1) + "</td><td style='color:#413b98;'>" + "직행" + "</td><td style='text-align: right;'>" + int2str(array1[i] + offset) + "</td></tr>";
-                } else {
-                    contents += "<tr><td>" + (i + 1) + "</td><td>" + "" + "</td><td style='text-align: right;'>" + int2str(array1[i] + offset) + "</td></tr>";
-                }
-            }
-            return contents;
-        }
 
         function contentsMakerExpress(offset) {
             var contents = "";
@@ -155,7 +138,7 @@
                     }
                 }
                 if (isExpressBus) {
-                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='padding-left:0; padding-right:0;'>직행</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
+                    contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td style='padding-left:0; padding-right:0; text-align:center; '>직행</td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
                 } else {
                     contents += "<tr><td>" + int2str(array1[i] + offset) + "</td><td></td><td style='text-align: right; font-size:0.94rem;' id='timeLeft" + offset + tick(i, 2) + "'>" + '<div class="spinner-border spinner-border-sm text-info spinner-timer"></div>' + "</td></tr>";
                 }
@@ -288,9 +271,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th width="90%">회차</th>
+                            <th width="90%">도착 예정</th>
                             <th width="0%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:130px; text-align:right;">시간</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider'>
@@ -352,9 +335,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th width="90%">회차</th>
+                            <th width="90%">도착 예정</th>
                             <th width="0%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:130px; text-align:right;">시간</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider2'>
@@ -413,9 +396,9 @@
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
                         <tr>
-                            <th width="90%">회차</th>
+                            <th width="90%">도착 예정</th>
                             <th width="0%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:130px; text-align:right;">시간</th>
+                            <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                         </tr>
                     </thead>
                     <tbody id='ttProvider3'>
@@ -473,11 +456,9 @@
 
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
-                        <tr>
-                            <th width="90%">회차</th>
-                            <th width="0%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:130px; text-align:right;">시간</th>
-                        </tr>
+                        <th width="90%">도착 예정</th>
+                        <th width="0%" style="min-width:55px;">직행</th>
+                        <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                     </thead>
                     <tbody id='ttProvider4'>
                     </tbody>
@@ -534,11 +515,9 @@
 
                 <table class="table table-hover" style="margin-top:12px;">
                     <thead>
-                        <tr>
-                            <th width="90%">회차</th>
-                            <th width="0%" style="min-width:55px;">직행</th>
-                            <th width="10%" style="min-width:130px; text-align:right;">시간</th>
-                        </tr>
+                        <th width="90%">도착 예정</th>
+                        <th width="0%" style="min-width:55px;">직행</th>
+                        <th width="10%" style="min-width:130px; text-align:right;">남은 시간</th>
                     </thead>
                     <tbody id='ttProvider5'>
                     </tbody>
@@ -553,7 +532,7 @@
             <strong>직행 버스</strong><br>화암에서 본교로 직행하는 버스가 주중에 운영되고 있습니다.
         </div>
         <div class="alert alert-info" style="margin-top:12px;">
-            <strong>참고: </strong> 시내 도로 사정에 따라 각 정류장 도착 예정 시간보다 늦을 수 있습니다.
+            <strong>참고: </strong> 시내 도로 사정에 따라 각 정류장 도착 예정 시각보다 늦을 수 있습니다.
         </div>
         <div class="alert alert-secondary" style=" margin-top:12px; font-size:0.8rem;">
             <strong>비상 연락처 안내 </strong><br>총무팀(주간, 042-350-2315)<br>수덕관광(010-9500-3663, 010-3030-4240)
