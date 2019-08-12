@@ -5,12 +5,12 @@
     "background_color": "#F7F8F9",
     "display": "standalone",
     "icons": [{
-            "src": "./icon-1x.png",
+            "src": "./bus-1x.png",
             "type": "image/png",
             "sizes": "48x48"
         },
         {
-            "src": "./icon-2x.png",
+            "src": "./bus-2x.png",
             "type": "image/png",
             "sizes": "96x96"
         },
@@ -25,5 +25,5 @@
             "sizes": "192x192"
         }
     ],
-    "start_url": "/index.html"
+    "start_url": "./index.html"
 }
